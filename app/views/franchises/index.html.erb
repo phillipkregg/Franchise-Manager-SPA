@@ -1,0 +1,27 @@
+<h1>Listing franchises</h1>
+
+<table>
+  <tr>
+    <th>Franchise name</th>
+    <th>Franchise num</th>
+    <th>Franchise set</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @franchises.each do |franchise| %>
+  <tr>
+    <td><%= franchise.franchise_name %></td>
+    <td><%= franchise.franchise_num %></td>
+    <td><%= franchise.franchise_set_id %></td>
+    <td><%= link_to 'Show', franchise %></td>
+    <td><%= link_to 'Edit', edit_franchise_path(franchise) %></td>
+    <td><%= link_to 'Destroy', franchise, confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Franchise', new_franchise_path %>

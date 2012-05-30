@@ -1,0 +1,29 @@
+<%= form_for(@franchise) do |f| %>
+  <% if @franchise.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@franchise.errors.count, "error") %> prohibited this franchise from being saved:</h2>
+
+      <ul>
+      <% @franchise.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :franchise_name %><br />
+    <%= f.text_field :franchise_name %>
+  </div>
+  <div class="field">
+    <%= f.label :franchise_num %><br />
+    <%= f.text_field :franchise_num %>
+  </div>
+  <div class="field">
+    <%= f.label :franchise_set_id %><br />
+    <%= f.number_field :franchise_set_id %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

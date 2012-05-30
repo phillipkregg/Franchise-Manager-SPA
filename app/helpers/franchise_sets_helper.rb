@@ -1,0 +1,2 @@
+module FranchiseSetsHelper
+end

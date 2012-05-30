@@ -1,0 +1,40 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Set name:</b>
+  <%= @franchise_set.set_name %>
+</p>
+
+<p>
+  <b>Set num:</b>
+  <%= @franchise_set.set_num %>
+</p>
+
+<p>
+  <b>Soa num:</b>
+  <%= @franchise_set.soa_num %>
+</p>
+
+<p>
+  <b>Address:</b>
+  <%= @franchise_set.address %>
+</p>
+
+<p>
+  <b>Time zone:</b>
+  <%= @franchise_set.time_zone %>
+</p>
+
+<p>
+  <b>Country:</b>
+  <%= @franchise_set.country %>
+</p>
+
+<p>
+  <b>Temperature:</b>
+  <%= @franchise_set.temperature %>
+</p>
+
+
+<%= link_to 'Edit', edit_franchise_set_path(@franchise_set) %> |
+<%= link_to 'Back', franchise_sets_path %>

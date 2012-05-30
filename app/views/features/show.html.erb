@@ -1,0 +1,15 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Feature name:</b>
+  <%= @feature.feature_name %>
+</p>
+
+<p>
+  <b>Franchise set:</b>
+  <%= @feature.franchise_set_id %>
+</p>
+
+
+<%= link_to 'Edit', edit_feature_path(@feature) %> |
+<%= link_to 'Back', features_path %>

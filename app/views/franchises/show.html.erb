@@ -1,0 +1,20 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Franchise name:</b>
+  <%= @franchise.franchise_name %>
+</p>
+
+<p>
+  <b>Franchise num:</b>
+  <%= @franchise.franchise_num %>
+</p>
+
+<p>
+  <b>Franchise set:</b>
+  <%= @franchise.franchise_set_id %>
+</p>
+
+
+<%= link_to 'Edit', edit_franchise_path(@franchise) %> |
+<%= link_to 'Back', franchises_path %>

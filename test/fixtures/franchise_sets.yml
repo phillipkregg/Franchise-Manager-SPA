@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  set_name: MyString
+  set_num: MyString
+  soa_num: MyString
+  address: MyString
+  time_zone: MyString
+  country: MyString
+  temperature: MyString
+
+two:
+  set_name: MyString
+  set_num: MyString
+  soa_num: MyString
+  address: MyString
+  time_zone: MyString
+  country: MyString
+  temperature: MyString

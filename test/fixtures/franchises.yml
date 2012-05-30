@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  franchise_name: MyString
+  franchise_num: MyString
+  franchise_set_id: 1
+
+two:
+  franchise_name: MyString
+  franchise_num: MyString
+  franchise_set_id: 1

@@ -1,0 +1,20 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>User name:</b>
+  <%= @user.user_name %>
+</p>
+
+<p>
+  <b>Franchise set:</b>
+  <%= @user.franchise_set %>
+</p>
+
+<p>
+  <b>User domain:</b>
+  <%= @user.user_domain %>
+</p>
+
+
+<%= link_to 'Edit', edit_user_path(@user) %> |
+<%= link_to 'Back', users_path %>

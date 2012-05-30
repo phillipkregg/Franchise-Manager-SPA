@@ -1,0 +1,35 @@
+<h1>Listing franchise_sets</h1>
+
+<table>
+  <tr>
+    <th>Set name</th>
+    <th>Set num</th>
+    <th>Soa num</th>
+    <th>Address</th>
+    <th>Time zone</th>
+    <th>Country</th>
+    <th>Temperature</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @franchise_sets.each do |franchise_set| %>
+  <tr>
+    <td><%= franchise_set.set_name %></td>
+    <td><%= franchise_set.set_num %></td>
+    <td><%= franchise_set.soa_num %></td>
+    <td><%= franchise_set.address %></td>
+    <td><%= franchise_set.time_zone %></td>
+    <td><%= franchise_set.country %></td>
+    <td><%= franchise_set.temperature %></td>
+    <td><%= link_to 'Show', franchise_set %></td>
+    <td><%= link_to 'Edit', edit_franchise_set_path(franchise_set) %></td>
+    <td><%= link_to 'Destroy', franchise_set, confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Franchise set', new_franchise_set_path %>

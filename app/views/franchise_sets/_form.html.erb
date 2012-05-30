@@ -1,0 +1,45 @@
+<%= form_for(@franchise_set) do |f| %>
+  <% if @franchise_set.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@franchise_set.errors.count, "error") %> prohibited this franchise_set from being saved:</h2>
+
+      <ul>
+      <% @franchise_set.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :set_name %><br />
+    <%= f.text_field :set_name %>
+  </div>
+  <div class="field">
+    <%= f.label :set_num %><br />
+    <%= f.text_field :set_num %>
+  </div>
+  <div class="field">
+    <%= f.label :soa_num %><br />
+    <%= f.text_field :soa_num %>
+  </div>
+  <div class="field">
+    <%= f.label :address %><br />
+    <%= f.text_field :address %>
+  </div>
+  <div class="field">
+    <%= f.label :time_zone %><br />
+    <%= f.text_field :time_zone %>
+  </div>
+  <div class="field">
+    <%= f.label :country %><br />
+    <%= f.text_field :country %>
+  </div>
+  <div class="field">
+    <%= f.label :temperature %><br />
+    <%= f.text_field :temperature %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

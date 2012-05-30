@@ -1,0 +1,9 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  feature_name: MyString
+  franchise_set_id: 1
+
+two:
+  feature_name: MyString
+  franchise_set_id: 1
