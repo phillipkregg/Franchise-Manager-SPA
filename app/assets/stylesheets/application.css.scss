@@ -12,12 +12,28 @@
  *= require_tree .
 */
 
+$green: #46a546;
+$navbarText: #fff;
+$navbarLinkColor: #fff;
+$navbarBackgroundHighlight: $green;
+$navbarBackground: $green;
+
 @import "bootstrap";
+@import "bootstrap-responsive";
 
 
 body {
   padding-top: 10px;
   padding-bottom: 40px;
+  background-image: url(image_path('gray_gradient_bg_1.png'));
+  background-repeat: repeat-x;
+}
+
+#main  {
+    padding: 10px;
+    background-color: white;
+    
+  
 }
 
 h3 {
@@ -25,9 +41,15 @@ h3 {
 }
 
 
+th {
+  background-color: $grayLight;
+  color: white;
+}
 
-
-
+.franchise_sets_header {
+  margin-bottom: 10px;
+  border: solid 1px black;
+}
 
 
 
