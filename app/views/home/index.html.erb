@@ -30,11 +30,14 @@
 
 <!--**** INDEX container *****-->
 <div data-bind='visible: showSetGrid'>
-	
-	<a data-bind='click: function() { FranchiseSetViewModel.newAction() }' class="btn btn-large btn-primary">
-		<i class="icon-plus icon-white"></i>
-		Add Franchise Set
-	</a><br/>
+	<div class="well">
+		<h3 class="pull-left">Franchise Sets</h3>
+		
+		<a data-bind='click: function() { FranchiseSetViewModel.newAction() }' class="pull-right btn btn-large btn-primary">
+			<i class="icon-plus icon-white"></i>
+			Add Franchise Set
+		</a><br/></br/>
+	</div>
 		
 	<table class="table">
 	  <thead>
@@ -109,7 +112,7 @@
 
 <!--*** SELECT FRANCHISE SET Template  ***-->
 <script id="selectFranchiseSet" type="text/html">
-	<div class="hero-unit"><br/>
+	<div class="well"><br/>
 		<h3>Please select a Franchise Set to Edit</h3>
 		<br/>
 	</div>
