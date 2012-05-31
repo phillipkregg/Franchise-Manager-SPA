@@ -12,11 +12,13 @@
  *= require_tree .
 */
 
+$gray: #555;
 $green: #46a546;
 $navbarText: #fff;
 $navbarLinkColor: #fff;
-$navbarBackgroundHighlight: $green;
-$navbarBackground: $green;
+$navbarBackgroundHighlight: $gray;
+$navbarBackground: $gray;
+$btnPrimaryBackground: #ff3300;
 
 @import "bootstrap";
 @import "bootstrap-responsive";
@@ -29,9 +31,10 @@ body {
   background-repeat: repeat-x;
 }
 
-#main  {
+.main  {
     padding: 10px;
     background-color: white;
+    @include border-radius(10px);
     
   
 }
