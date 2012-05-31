@@ -1,2 +1,441 @@
-<h1>Home#index</h1>
-<p>Find me in app/views/home/index.html.erb</p>
+
+<!-- ***** MAIN NAV BAR ***** -->
+<div class="navbar">
+	<div class="navbar-inner">
+	  <div class="container">
+	    <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+	      <span class="icon-bar"></span>
+	      <span class="icon-bar"></span>
+	      <span class="icon-bar"></span>
+	    </a>
+	    <a class="brand" href="#" data-bind="click: function() { FranchiseSetViewModel.indexAction() }">Franchise Manager - SPA</a>
+	    <div class="nav-collapse">
+	      <ul class="nav">
+	        <li class="active"><a href="#" data-bind="click: function() { FranchiseSetViewModel.indexAction() }">Franchise Sets</a></li>
+	        <li><a href="#about">About</a></li>
+	        <li><a href="#contact">Contact</a></li>
+	      </ul>
+	    </div><!--/.nav-collapse -->
+	  </div>
+	</div>
+</div>
+
+<!--**** FLASH MESSAGES *****-->
+<div class="alert" data-bind="visible: function() { FranchiseSetViewModel.shownOnce() }">
+	<a class="close" data-dismiss="alert" href="#">&times;</a>
+	<span data-bind='text: flash'></span>
+</div>
+
+
+<div data-bind='visible: currentPage() == "index"'>
+	
+	<a data-bind='click: function() { FranchiseSetViewModel.newAction() }' class="btn btn-large btn-primary">Add Franchise Set</a><br/>
+		
+	<table class="table">
+	  <thead>
+	    <tr>
+	    	<th>Franchise Set ID</th>
+	      <th>Franchise Set Name</th>
+	      <th>Main Address</th>
+	      <th>Time Zone</th>
+	      <th></th>
+	      <th></th>
+	      <th></th>
+	    </tr>
+	  </thead>
+	  <tbody data-bind='template: {name: "indexTemplate", foreach: franchiseSets}'></tbody>
+	</table>	
+	
+</div>
+
+
+<!--***** NEW franchise set container *****-->
+<div data-bind='visible: currentPage() == "new"'>
+	<div data-bind='template: {name: "newTemplate", data: tempFranchiseSet}'></div>
+</div>
+
+
+<!--***** UPDATE franchise set container *****-->
+<div data-bind='visible: currentPage() == "edit"'>
+	<div data-bind=' template: { name: "editTemplate", data: tempFranchiseSet }'></div>
+</div>
+
+
+<!-- INDEX Template  -->
+<script id="indexTemplate" type="text/html">
+	<tr>	
+		<td data-bind="text: id"></td>
+	  <td data-bind="text: set_name"></td>
+	  <td data-bind="text: address"></td>
+	  <td data-bind="text: time_zone"></td>
+	
+	  <td>
+	    <a data-bind="click: function() { FranchiseSetViewModel.showAction($data) }" class="btn btn-mini">Show</a>
+	  </td>
+	  <td>
+	    <a data-bind="click: function() { FranchiseSetViewModel.editAction($data) }" class="btn btn-mini">Edit</a>
+	  </td>
+	  <td>
+	    <a data-bind="click: function() { FranchiseSetViewModel.destroyAction($data) }" class="btn btn-mini btn-danger">Delete</a>
+	  </td>
+	</tr>
+</script>
+
+
+
+<!-- New Franchise Set Template  -->
+<script id="newTemplate" type="text/html">
+
+	<form id="form">
+	  <div class="field">
+		 	<label for="set_name">Franchise Set Name</label>
+		 	<input id="set_name" data-bind="value: set_name" />	 
+	  </div>
+	  
+	  <div class="field">
+		 	<label for="set_num">Franchise Set Number</label>
+		 	<input id="new_set_num" data-bind="value: set_num" />
+	  </div>
+	  
+	  <div class="field">
+		 	<label for="soa_num">SOA Number</label>
+		 	<input id="new_soa_num" data-bind="value: soa_num" />
+	  </div>
+	  
+	  <div class="field">
+		 	<label for="address">Main Address</label>
+		 	<input id="new_address" data-bind="value: address" />
+	  </div>
+	  
+	  <div class="field">
+		 	<label for="country">Country</label>
+			<select name="new_country" data-bind="value: country"> 
+				<option value="" selected="selected">Select Country</option> 
+				<option value="United States">United States</option> 			
+				<option value="Canada">Canada</option> 			
+			</select>		
+	  </div>
+	  
+	  <div class="field">
+		 	<label for="time_zone">Time Zone</label>
+			<select name="new_timezone" data-bind="value: country"> 
+				<option value="" selected="selected">Select Time Zone</option> 
+				<option value="eastern">Eastern</option> 			
+				<option value="central">Central</option>
+				<option value="mountain">Mountain</option>
+				<option value="pacific">Pacific</option> 			
+			</select>		
+	  </div>
+	  
+	  <div class="field">
+		 	<label for="temperature">Default Temperature</label>
+			<select name="new_temperature" data-bind="value: temperature"> 
+				<option value="" selected="selected">Select Temperature</option> 
+				<option value="fahrenheit">Fahrenheit</option> 			
+				<option value="celsius">Celsius</option> 			
+			</select>		
+	  </div>
+	  
+	  
+	</form>
+	
+	<div>
+	  <button data-bind="click: function() { FranchiseSetViewModel.createAction($data) }" class="btn btn-primary">Create</button>
+	  <a data-bind="click: function() { FranchiseSetViewModel.indexAction() }" class="btn">Cancel</a>
+	</div>
+	
+</script>
+
+
+
+
+
+
+<!-- EDIT Franchise Set Template  -->
+<script id="editTemplate" type="text/html">
+
+	<form id="form">
+	  <div class="field">
+		 	<label for="set_name">Franchise Set Name</label>
+		 	<input id="update_set_name" data-bind="value: set_name" />	 
+	  </div>
+	  
+	  <div class="field">
+		 	<label for="set_num">Franchise Set Number</label>
+		 	<input id="update_set_num" data-bind="value: set_num" />
+	  </div>  
+	  
+	 <div class="field">
+		 	<label for="soa_num">SOA Number</label>
+		 	<input id="update_soa_num" data-bind="value: soa_num" />
+	  </div>
+	  
+	  <div class="field">
+		 	<label for="address">Main Address</label>
+		 	<input id="update_address" data-bind="value: address" />
+	  </div>
+	  
+	  <div class="field">
+		 	<label for="country">Country</label>
+			<select name="update_country" data-bind="value: country"> 
+				<option value="" selected="selected">Select Country</option> 
+				<option value="United States">United States</option> 			
+				<option value="Canada">Canada</option> 			
+			</select>		
+	  </div>
+	  
+	  <div class="field">
+		 	<label for="time_zone">Time Zone</label>
+			<select name="update_timezone" data-bind="value: time_zone"> 
+				<option value="">Select Time Zone</option> 
+				<option value="eastern">Eastern</option> 			
+				<option value="central">Central</option>
+				<option value="mountain">Mountain</option>
+				<option value="pacific">Pacific</option> 			
+			</select>		
+	  </div>
+	  
+	  <div class="field">
+		 	<label for="temperature">Default Temperature</label>
+			<select name="update_temperature" data-bind="value: temperature"> 
+				<option value="" >Select Temperature</option> 
+				<option value="fahrenheit">Fahrenheit</option> 			
+				<option value="celsius">Celsius</option> 			
+			</select>		
+	  </div>
+	  
+	  
+	</form>
+	
+	<div>
+	  <button data-bind="click: function() { FranchiseSetViewModel.updateAction($data) }" class="btn btn-primary">Save Changes</button>
+	  <a data-bind="click: function() { FranchiseSetViewModel.indexAction() }" class="btn">Cancel</a>
+	</div>
+	
+</script>
+
+
+
+
+
+
+<!--***** VIEWMODEL JAVASCRIPT *****-->
+
+<script type="text/javascript">
+
+var FranchiseSetViewModel = {
+	
+	flash: ko.observable(),
+	shownOnce: ko.observable(),
+	currentPage: ko.observable(),
+	errors: ko.observableArray(),
+	franchiseSets: ko.observableArray(),
+	selectedFranchiseSet: ko.observable(),
+	tempFranchiseSet: {
+		id:          ko.observable(),
+		set_name:    ko.observable(),
+		set_num:     ko.observable(),
+		soa_num:     ko.observable(),
+		address:     ko.observable(),
+		time_zone:   ko.observable(),
+		country:     ko.observable(),
+		temperature: ko.observable(),
+		created_at:  ko.observable(),
+		updated_at:  ko.observable()
+	},
+	
+	setFlash: function(flash) {
+		this.flash(flash);
+		this.shownOnce(false);
+		$(".alert").alert();
+	},
+	
+	checkFlash: function() {
+		if (this.shownOnce() == true) {
+			this.flash('');
+			$(".alert").alert('close');
+		}
+	},
+	
+	clearTempFranchiseSet: function() {
+		this.tempFranchiseSet.id('');
+		this.tempFranchiseSet.set_name('');
+		this.tempFranchiseSet.set_num('');
+		this.tempFranchiseSet.soa_num('');
+		this.tempFranchiseSet.address('');
+		this.tempFranchiseSet.time_zone('');
+		this.tempFranchiseSet.country('');
+		this.tempFranchiseSet.temperature('');
+		this.tempFranchiseSet.created_at('');
+		this.tempFranchiseSet.updated_at('');
+		
+	},
+	
+	
+	prepareTempFranchiseSet: function() {
+		this.tempFranchiseSet.id(ko.utils.unwrapObservable(this.selectedFranchiseSet().id));
+		this.tempFranchiseSet.set_name(ko.utils.unwrapObservable(this.selectedFranchiseSet().set_name));
+		this.tempFranchiseSet.set_num(ko.utils.unwrapObservable(this.selectedFranchiseSet().set_num));
+		//console.log(this.tempFranchiseSet.set_num(ko.utils.unwrapObservable(this.selectedFranchiseSet().set_num)))
+		this.tempFranchiseSet.soa_num(ko.utils.unwrapObservable(this.selectedFranchiseSet().soa_num));
+		this.tempFranchiseSet.address(ko.utils.unwrapObservable(this.selectedFranchiseSet().address));
+		this.tempFranchiseSet.time_zone(ko.utils.unwrapObservable(this.selectedFranchiseSet().time_zone));
+		this.tempFranchiseSet.country(ko.utils.unwrapObservable(this.selectedFranchiseSet().country));
+		//console.log(this.tempFranchiseSet.country(ko.utils.unwrapObservable(this.selectedFranchiseSet().country)))
+		this.tempFranchiseSet.temperature(ko.utils.unwrapObservable(this.selectedFranchiseSet().temperature));
+		this.tempFranchiseSet.created_at(ko.utils.unwrapObservable(this.selectedFranchiseSet().created_at));
+		this.tempFranchiseSet.updated_at(ko.utils.unwrapObservable(this.selectedFranchiseSet().updated_at));
+	},
+		
+	
+	
+	indexAction: function() {
+		this.checkFlash();
+				
+		$.getJSON('/franchise_sets', function(data) {
+			FranchiseSetViewModel.franchiseSets(data);
+			FranchiseSetViewModel.currentPage('index');
+			FranchiseSetViewModel.shownOnce(true);
+			//console.log(data);
+		});
+		
+	},
+	
+	
+	showAction: function(itemToShow) {
+		
+	},
+	
+	
+	newAction: function() {
+		this.checkFlash();
+		this.currentPage('new');
+		this.clearTempFranchiseSet();
+		this.shownOnce(true);
+		$(".alert").alert('close')
+		
+	},
+	
+	
+	 createAction: function(itemToCreate) {
+	 	
+	    var json_data = itemToCreate;
+	    
+	    //console.log(json_data)
+	    
+	    $.ajax({
+	      type: 'POST',
+	      url: '/franchise_sets',
+	      dataType: "json",
+	      data: {
+	      	franchise_set: json_data
+	      },	     
+	      success: function(createdItem) {
+	        FranchiseSetViewModel.errors([]);
+	        FranchiseSetViewModel.setFlash('Franchise Set successfully created.');
+	        FranchiseSetViewModel.clearTempFranchiseSet();
+	        FranchiseSetViewModel.indexAction(); // redirect to Franchise Set list
+	        FranchiseSetViewModel.checkFlash();
+	        	        
+	      },
+	      error: function(msg) {
+	        //FranchiseSetViewModel.errors(JSON.parse(msg.responseText));
+	      }
+	    });
+	    
+	  },
+	  
+	  
+	  
+
+	 editAction: function(itemToEdit) {
+	 	//console.log(itemToEdit)
+	    this.checkFlash();
+	    this.selectedFranchiseSet(itemToEdit);
+	    //console.log(this.selectedFranchiseSet())
+	    this.prepareTempFranchiseSet();
+	    this.currentPage('edit');
+	    this.shownOnce(true);
+	    console.log(this.tempFranchiseSet.set_name())
+	  },
+	  
+	  
+	  
+	  
+	updateAction: function(itemToUpdate) {
+		var json_data = itemToUpdate;
+		//delete json_data.id;
+		//delete json_data.created_at;
+		//delete json_data.updated_at;
+		
+		//console.log(itemToUpdate)
+ 
+		$.ajax({
+			type: 'PUT',
+			url: '/franchise_sets/' + itemToUpdate.id(),
+			dataType: "json",
+			data: {
+			  franchise_set: json_data
+			},			
+			success: function(updatedItem) {
+				FranchiseSetViewModel.errors([]);
+				FranchiseSetViewModel.setFlash('Franchise Set successfully updated.');
+				FranchiseSetViewModel.indexAction();
+			},
+			error: function(msg) {
+				FranchiseSetViewModel.errors(JSON.parse(msg.responseText));
+				}
+		});
+	},
+
+
+	
+	
+	destroyAction: function(setToDestroy) {
+		if (confirm("Are you sure?")) {
+			$.ajax({
+				type: 'DELETE',
+				url: '/franchise_sets/' + setToDestroy.id,
+				dataType: 'json',
+				success: function() {
+					FranchiseSetViewModel.errors([]);
+					FranchiseSetViewModel.setFlash('Franchise Set successfully deleted');
+					FranchiseSetViewModel.indexAction();
+										
+				},
+				error: function(msg) {
+					FranchiseSetViewModel.errors(JSON.parse(msg.responseText));
+				} 
+			})
+		}
+	},
+
+
+	
+	
+};
+
+
+
+
+$(document).ready(function() {
+	ko.applyBindings(FranchiseSetViewModel);
+	FranchiseSetViewModel.indexAction();
+	FranchiseSetViewModel.clearTempFranchiseSet();
+		
+	
+});
+
+
+
+
+
+
+</script>
+
+
+
+
+
+
+

@@ -61,7 +61,7 @@ class FranchiseSetsController < ApplicationController
     respond_to do |format|
       if @franchise_set.update_attributes(params[:franchise_set])
         format.html { redirect_to @franchise_set, notice: 'Franchise set was successfully updated.' }
-        format.json { head :no_content }
+        format.json { render json: @franchise_set }
       else
         format.html { render action: "edit" }
         format.json { render json: @franchise_set.errors, status: :unprocessable_entity }
