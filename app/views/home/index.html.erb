@@ -37,8 +37,7 @@
 	    	<th>Franchise Set ID</th>
 	      <th>Franchise Set Name</th>
 	      <th>Main Address</th>
-	      <th>Time Zone</th>
-	      <th></th>
+	      <th>Time Zone</th>	      
 	      <th></th>
 	      <th></th>
 	    </tr>
@@ -67,11 +66,8 @@
 		<td data-bind="text: id"></td>
 	  <td data-bind="text: set_name"></td>
 	  <td data-bind="text: address"></td>
-	  <td data-bind="text: time_zone"></td>
-	
-	  <td>
-	    <a data-bind="click: function() { FranchiseSetViewModel.showAction($data) }" class="btn btn-mini">Show</a>
-	  </td>
+	  <td data-bind="text: time_zone"></td>	
+	  
 	  <td>
 	    <a data-bind="click: function() { FranchiseSetViewModel.editAction($data) }" class="btn btn-mini">Edit</a>
 	  </td>
@@ -257,6 +253,8 @@ var FranchiseSetViewModel = {
 		}
 	},
 	
+		
+	
 	clearTempFranchiseSet: function() {
 		this.tempFranchiseSet.id('');
 		this.tempFranchiseSet.set_name('');
@@ -312,7 +310,7 @@ var FranchiseSetViewModel = {
 		this.currentPage('new');
 		this.clearTempFranchiseSet();
 		this.shownOnce(true);
-		$(".alert").alert('close')
+		//$(".alert").alert('close')
 		
 	},
 	
@@ -422,7 +420,7 @@ $(document).ready(function() {
 	ko.applyBindings(FranchiseSetViewModel);
 	FranchiseSetViewModel.indexAction();
 	FranchiseSetViewModel.clearTempFranchiseSet();
-		
+	$(".alert").alert('close');
 	
 });
 
