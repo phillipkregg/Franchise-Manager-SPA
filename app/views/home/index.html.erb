@@ -8,7 +8,7 @@
 	      <span class="icon-bar"></span>
 	      <span class="icon-bar"></span>
 	    </a>
-	    <a class="brand" href="#" data-bind="click: function() { FranchiseSetViewModel.indexAction() }">Franchise Manager - SPA</a>
+	    <a class="brand" href="#" data-bind="click: function() { FranchiseSetViewModel.indexAction() }">Franchise Manager</a>
 	    <div class="nav-collapse">
 	      <ul class="nav">
 	        <li class="active"><a href="#" data-bind="click: function() { FranchiseSetViewModel.indexAction() }">Franchise Sets</a></li>
@@ -16,7 +16,12 @@
 	        <li><a href="#contact">Contact</a></li>
 	      </ul>
 	    </div><!--/.nav-collapse -->
+	    
+	    <!-- <%= image_tag asset_path('house_logo_small.png'), :class => "pull-right" %> -->
+	    
 	  </div>
+	  
+	  
 	</div>
 </div>
 
@@ -97,7 +102,7 @@
 	  
 	   
 	   <td>
-	     <a data-bind="click: function() { FranchiseSetViewModel.destroyAction($data) }" class="btn btn-danger">
+	     <a data-bind="click: function() { FranchiseSetViewModel.destroyAction($data) }" class="btn btn-danger pull-right">
 	     	<i class="icon-trash icon-white"></i>
 	     	Delete
 	     </a>
@@ -202,7 +207,7 @@
 		<div class="tab-pane active" id="details">
 			<form id="form">
 				
-			  <div class="field">
+			  <div class="field">			  		
 				 	<label for="set_name">Franchise Set Name</label>
 				 	<input id="update_set_name" data-bind="value: set_name" />	 
 			  </div>
@@ -260,6 +265,13 @@
 		<!-- Franchises Container -->
 		<div class="tab-pane" id="franchises">
 			
+			<h3 class="pull-left">Franchises</h3>
+			
+			<a class="btn btn-primary pull-right">
+				<i class="icon-plus-sign icon-white"></i>
+				Add Franchise
+			</a><br /><br />
+			
 			<table id="franchises_table" class="table table-bordered table-condensed">
 			  <thead>
 			    <tr>
@@ -272,13 +284,15 @@
 			  </thead>
 			  <tbody data-bind='template: {name: "franchiseIndexTemplate", foreach: franchises}'></tbody>
 			</table>	
+			
+			
 					
 		</div><!-- Closes Franchise Tab pane -->	
 			
-			
+		<br /><hr />	
 		<div>
-		  <button data-bind="click: function() { FranchiseSetViewModel.updateAction($data) }" class="btn btn-primary">Save Changes</button>
-		  <a data-bind="click: function() { FranchiseSetViewModel.indexAction() }" class="btn">Cancel</a>
+		  <button data-bind="click: function() { FranchiseSetViewModel.updateAction($data) }" class="btn btn-large btn-primary">Save Changes</button>
+		  <a data-bind="click: function() { FranchiseSetViewModel.indexAction() }" class="btn btn-large">Cancel</a>
 		</div>
 		
 		
@@ -298,7 +312,8 @@
 				  				  					  
 				   
 				   <td>
-				     <a data-bind="click: function() { FranchiseSetViewModel.destroyAction($data) }" class="btn btn-danger">
+				   	
+				     <a data-bind="click: function() { FranchiseSetViewModel.destroyAction($data) }" class="btn btn-danger pull-right">
 				     	<i class="icon-trash icon-white"></i>
 				     	Delete
 				     </a>
