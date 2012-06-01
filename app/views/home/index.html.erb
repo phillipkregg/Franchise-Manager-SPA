@@ -267,7 +267,7 @@
 			
 			<h3 class="pull-left">Franchises</h3>
 			
-			<a class="btn btn-primary pull-right">
+			<a class="btn btn-primary pull-right" data-toggle="modal" href="#new_franchise_modal">
 				<i class="icon-plus-sign icon-white"></i>
 				Add Franchise
 			</a><br /><br />
@@ -291,7 +291,10 @@
 			
 		<br /><hr />	
 		<div>
-		  <button data-bind="click: function() { FranchiseSetViewModel.updateAction($data) }" class="btn btn-large btn-primary">Save Changes</button>
+		  <button data-bind="click: function() { FranchiseSetViewModel.updateAction($data) }" class="btn btn-large btn-primary">
+		  		<i class="icon-check icon-white"></i>
+		  		Save Changes
+		  </button>
 		  <a data-bind="click: function() { FranchiseSetViewModel.indexAction() }" class="btn btn-large">Cancel</a>
 		</div>
 		
@@ -322,14 +325,57 @@
 				</tr>
 			</script>		
 		
-	</div><!-- Closes Main tab-content div  -->
-	
-	
+	</div><!-- Closes Main tab-content div  -->	
 	
 </script>
 
 
+<!--***** NEW franchise container - MODAL  *****-->
+<div class="modal hide fade in" id="new_franchise_modal">
+	<div class="modal-header">
+		<button class="close" data-dismiss="modal">×</button>
+		<h3>Add New Franchise</h3>
+  </div>
+  <div class="modal-body" >
+  	<p>Load new Franchise template and put it here</p>
+  </div>
+  <div class="modal-footer">
+		<a href="#" class="btn" data-dismiss="modal">Cancel</a>
+		<a href="#" class="btn btn-primary">Create Franchise</a>
+  </div>
+  
+	<!-- BELOW will go in modal-body when the Franchise ViewModel is ready    -->
+   <!-- data-bind='template: {name: "newFranchise", data: tempFranchise}' -->
+  
+</div>
 
+
+
+
+<!-- ADD NEW Franchise Template  -->
+<script id="newFranchise" type="text/html">
+	
+	<h3>Add New Franchise</h3>
+
+	<form id="form">
+	  <div class="field">
+		 	<label for="franchise_name">Franchise Name</label>
+		 	<input id="new_franchise_name" data-bind="value: franchise_name" />	 
+	  </div>
+	  
+	  <div class="field">
+		 	<label for="franchise_num">Franchise Number</label>
+		 	<input id="new_franchise_num" data-bind="value: franchise_num" />
+	  </div>
+	  
+	</form>
+	
+	<div>
+	  <button data-bind="click: function() { FranchiseViewModel.createAction($data) }" class="btn btn-primary">Create Franchise</button>
+	  <a data-bind="click: function() { FranchiseViewModel.franchiseIndexAction() }" class="btn">Cancel</a>
+	</div>
+	
+</script>
 
 
 <!--*****************************************
@@ -345,7 +391,7 @@
 		FranchiseViewModel.clearTempFranchise();
 		//console.log(FranchiseSetViewModel.selectedFranchiseSet())
 		
-		
+		$("#new_franchise_modal").modal('hide');
 		
 	});
 
