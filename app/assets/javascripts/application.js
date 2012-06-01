@@ -13,5 +13,8 @@
 //= require jquery
 //= require jquery_ujs
 //= require knockout-2.1.0
+//= require knockout-postbox.min.js
 //= require bootstrap
 //= require franchise_set_viewmodel
+//= require franchises_viewmodel
+

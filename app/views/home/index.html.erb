@@ -65,6 +65,7 @@
 </div>
 
 
+<!--$$$$$$$$$$$$$$$$$$$$$$$  FRANCHISE SET TEMPLATES $$$$$$$$$$$$$$$$$$$$$$$$-->
 
 
 <!--***** NEW franchise set container *****-->
@@ -77,8 +78,6 @@
 <div class="well" data-bind='visible: currentPage() == "edit"'>
 	<div data-bind=' template: { name: "editTemplate", data: tempFranchiseSet }'></div>
 </div>
-
-
 
 
 
@@ -105,11 +104,6 @@
 	   </td>
 	</tr>
 </script>
-
-
-
-
-
 
 
 <!--*** SELECT FRANCHISE SET Template  ***-->
@@ -190,91 +184,155 @@
 
 
 
-
-
-
 <!-- EDIT Franchise Set Template  -->
-<script id="editTemplate" type="text/html">
+<script id="editTemplate" type="text/html">	
 
 	<h3 data-bind="text: set_name"></h3>
-
-	<form id="form">
-	  <div class="field">
-		 	<label for="set_name">Franchise Set Name</label>
-		 	<input id="update_set_name" data-bind="value: set_name" />	 
-	  </div>
-	  
-	  <div class="field">
-		 	<label for="set_num">Franchise Set Number</label>
-		 	<input id="update_set_num" data-bind="value: set_num" />
-	  </div>  
-	  
-	 <div class="field">
-		 	<label for="soa_num">SOA Number</label>
-		 	<input id="update_soa_num" data-bind="value: soa_num" />
-	  </div>
-	  
-	  <div class="field">
-		 	<label for="address">Main Address</label>
-		 	<input id="update_address" data-bind="value: address" />
-	  </div>
-	  
-	  <div class="field">
-		 	<label for="country">Country</label>
-			<select name="update_country" data-bind="value: country"> 
-				<option value="" selected="selected">Select Country</option> 
-				<option value="United States">United States</option> 			
-				<option value="Canada">Canada</option> 			
-			</select>		
-	  </div>
-	  
-	  <div class="field">
-		 	<label for="time_zone">Time Zone</label>
-			<select name="update_timezone" data-bind="value: time_zone"> 
-				<option value="">Select Time Zone</option> 
-				<option value="eastern">Eastern</option> 			
-				<option value="central">Central</option>
-				<option value="mountain">Mountain</option>
-				<option value="pacific">Pacific</option> 			
-			</select>		
-	  </div>
-	  
-	  <div class="field">
-		 	<label for="temperature">Default Temperature</label>
-			<select name="update_temperature" data-bind="value: temperature"> 
-				<option value="" >Select Temperature</option> 
-				<option value="fahrenheit">Fahrenheit</option> 			
-				<option value="celsius">Celsius</option> 			
-			</select>		
-	  </div>
-	  
-	  
-	</form>
 	
-	<div>
-	  <button data-bind="click: function() { FranchiseSetViewModel.updateAction($data) }" class="btn btn-primary">Save Changes</button>
-	  <a data-bind="click: function() { FranchiseSetViewModel.indexAction() }" class="btn">Cancel</a>
-	</div>
+	<!-- Franchise Set tabs 	 -->
+	<ul id="set_tabs" class="nav nav-tabs">
+	  	<li class="active"><a href="#details" data-toggle="tab">Details</a></li>
+	  	<li><a href="#franchises" data-toggle="tab">Franchises</a></li>
+	  	<li><a href="#users" data-toggle="tab">Users</a></li>
+	  	<li><a href="#features" data-toggle="tab">Features</a></li>
+	</ul>
+	
+	<div class="tab-content">
+		
+		<div class="tab-pane active" id="details">
+			<form id="form">
+				
+			  <div class="field">
+				 	<label for="set_name">Franchise Set Name</label>
+				 	<input id="update_set_name" data-bind="value: set_name" />	 
+			  </div>
+			  
+			  <div class="field">
+				 	<label for="set_num">Franchise Set Number</label>
+				 	<input id="update_set_num" data-bind="value: set_num" />
+			  </div>  
+			  
+			 <div class="field">
+				 	<label for="soa_num">SOA Number</label>
+				 	<input id="update_soa_num" data-bind="value: soa_num" />
+			  </div>
+			  
+			  <div class="field">
+				 	<label for="address">Main Address</label>
+				 	<input id="update_address" data-bind="value: address" />
+			  </div>
+			  
+			  <div class="field">
+				 	<label for="country">Country</label>
+					<select name="update_country" data-bind="value: country"> 
+						<option value="" selected="selected">Select Country</option> 
+						<option value="United States">United States</option> 			
+						<option value="Canada">Canada</option> 			
+					</select>		
+			  </div>
+			  
+			  <div class="field">
+				 	<label for="time_zone">Time Zone</label>
+					<select name="update_timezone" data-bind="value: time_zone"> 
+						<option value="">Select Time Zone</option> 
+						<option value="eastern">Eastern</option> 			
+						<option value="central">Central</option>
+						<option value="mountain">Mountain</option>
+						<option value="pacific">Pacific</option> 			
+					</select>		
+			  </div>
+			  
+			  <div class="field">
+				 	<label for="temperature">Default Temperature</label>
+					<select name="update_temperature" data-bind="value: temperature"> 
+						<option value="" >Select Temperature</option> 
+						<option value="fahrenheit">Fahrenheit</option> 			
+						<option value="celsius">Celsius</option> 			
+					</select>		
+			  </div>		  
+			  
+			</form>
+		</div><!-- Closes Details tab pane -->
+		
+		
+		<!--$$$$$$$$$$$$$$  FRANCHISES TEMPLATES - still part of the Franchise Sets Tabs $$$$$$$$$$$$$$$-->
+		
+		<!-- Franchises Container -->
+		<div class="tab-pane" id="franchises">
+			
+			<table id="franchises_table" class="table table-bordered table-condensed">
+			  <thead>
+			    <tr>
+			    	<th></th>
+			    	<th>Franchise ID</th>
+			      <th>Franchise Name</th>
+			      <th>Franchise Number</th>         
+			      <th></th>
+			    </tr>
+			  </thead>
+			  <tbody data-bind='template: {name: "franchiseIndexTemplate", foreach: franchises}'></tbody>
+			</table>	
+					
+		</div><!-- Closes Franchise Tab pane -->	
+			
+			
+		<div>
+		  <button data-bind="click: function() { FranchiseSetViewModel.updateAction($data) }" class="btn btn-primary">Save Changes</button>
+		  <a data-bind="click: function() { FranchiseSetViewModel.indexAction() }" class="btn">Cancel</a>
+		</div>
+		
+		
+			
+		<!-- FRANCHISE INDEX Template  -->
+			<script id="franchiseIndexTemplate" type="text/html">
+				<tr>	
+					<td>			
+				     <a data-bind="click: function() { FranchiseViewModel.editAction($data) }" class="btn btn-success">
+				     	<i class="icon-edit icon-white"></i>
+				     	Edit
+				     </a>
+				   </td>
+					<td data-bind="text: id"></td>
+				  	<td data-bind="text: $data.franchise_name"></td>
+				  	<td data-bind="text: $data.franchise_num"></td>
+				  				  					  
+				   
+				   <td>
+				     <a data-bind="click: function() { FranchiseSetViewModel.destroyAction($data) }" class="btn btn-danger">
+				     	<i class="icon-trash icon-white"></i>
+				     	Delete
+				     </a>
+				   </td>
+				   
+				</tr>
+			</script>		
+		
+	</div><!-- Closes Main tab-content div  -->
+	
+	
 	
 </script>
 
 
 
 
+
+<!--*****************************************
+	   			JQUERY KICKSTART  
+*******************************************-->
+
 <script type="text/javascript">
-
-$(document).ready(function() {
-	ko.applyBindings(FranchiseSetViewModel);
-	FranchiseSetViewModel.indexAction();
-	FranchiseSetViewModel.clearTempFranchiseSet();
-	$(".alert").alert('close');
-	
-});
-
-
-
-
-
+	$(document).ready(function() {
+		ko.applyBindings(FranchiseSetViewModel);
+		ko.applyBindings(FranchiseViewModel, document.getElementById('franchises'));
+		FranchiseSetViewModel.indexAction();		
+		FranchiseSetViewModel.clearTempFranchiseSet();
+		FranchiseViewModel.clearTempFranchise();
+		//console.log(FranchiseSetViewModel.selectedFranchiseSet())
+		
+		
+		
+	});
 
 </script>
 

@@ -1,30 +1,27 @@
 
 
-/*****************************
- Viewmodel for Franchise Sets
-******************************/
+/*******************************************
+ Viewmodel for Franchises Belonging to Sets
+********************************************/
 
 
-var FranchiseSetViewModel = {		
+var FranchiseViewModel = {	
+	franchiseSetId: ko.observable().subscribeTo("franchise_set_id"),	
 	showSetGrid: ko.observable(true),
 	showSelectSet: ko.observable(),
 	flash: ko.observable(),
 	shownOnce: ko.observable(),
 	currentPage: ko.observable(),
 	errors: ko.observableArray(),
-	franchiseSets: ko.observableArray(),
-	selectedFranchiseSet: ko.observable().publishOn("franchise_set_id"),
-	tempFranchiseSet: {
-		id:          ko.observable(),
-		set_name:    ko.observable(),
-		set_num:     ko.observable(),
-		soa_num:     ko.observable(),
-		address:     ko.observable(),
-		time_zone:   ko.observable(),
-		country:     ko.observable(),
-		temperature: ko.observable(),
-		created_at:  ko.observable(),
-		updated_at:  ko.observable()
+	franchises: ko.observableArray(),
+	selectedFranchise: ko.observable(),
+	tempFranchise: {
+		id:          			ko.observable(),
+		franchise_name:    	ko.observable(),
+		franchise_num:			ko.observable(),
+		franchise_set_id:		ko.observable(),
+		created_at:  			ko.observable(),
+		updated_at:  			ko.observable()
 	},
 		
 	setFlash: function(flash) {
@@ -42,52 +39,48 @@ var FranchiseSetViewModel = {
 	
 		
 	
-	clearTempFranchiseSet: function() {
-		this.tempFranchiseSet.id('');
-		this.tempFranchiseSet.set_name('');
-		this.tempFranchiseSet.set_num('');
-		this.tempFranchiseSet.soa_num('');
-		this.tempFranchiseSet.address('');
-		this.tempFranchiseSet.time_zone('');
-		this.tempFranchiseSet.country('');
-		this.tempFranchiseSet.temperature('');
-		this.tempFranchiseSet.created_at('');
-		this.tempFranchiseSet.updated_at('');
+	clearTempFranchise: function() {
+		this.tempFranchise.id('');
+		this.tempFranchise.franchise_name('');
+		this.tempFranchise.franchise_num('');
+		this.tempFranchise.franchise_set_id('');
+		this.tempFranchise.created_at('');
+		this.tempFranchise.updated_at('');
 		
 	},
 	
 	
-	prepareTempFranchiseSet: function() {
-		this.tempFranchiseSet.id(ko.utils.unwrapObservable(this.selectedFranchiseSet().id));
-		this.tempFranchiseSet.set_name(ko.utils.unwrapObservable(this.selectedFranchiseSet().set_name));
-		this.tempFranchiseSet.set_num(ko.utils.unwrapObservable(this.selectedFranchiseSet().set_num));
-		//console.log(this.tempFranchiseSet.set_num(ko.utils.unwrapObservable(this.selectedFranchiseSet().set_num)))
-		this.tempFranchiseSet.soa_num(ko.utils.unwrapObservable(this.selectedFranchiseSet().soa_num));
-		this.tempFranchiseSet.address(ko.utils.unwrapObservable(this.selectedFranchiseSet().address));
-		this.tempFranchiseSet.time_zone(ko.utils.unwrapObservable(this.selectedFranchiseSet().time_zone));
-		this.tempFranchiseSet.country(ko.utils.unwrapObservable(this.selectedFranchiseSet().country));
-		//console.log(this.tempFranchiseSet.country(ko.utils.unwrapObservable(this.selectedFranchiseSet().country)))
-		this.tempFranchiseSet.temperature(ko.utils.unwrapObservable(this.selectedFranchiseSet().temperature));
-		this.tempFranchiseSet.created_at(ko.utils.unwrapObservable(this.selectedFranchiseSet().created_at));
-		this.tempFranchiseSet.updated_at(ko.utils.unwrapObservable(this.selectedFranchiseSet().updated_at));
+	prepareTempFranchise: function() {
+		this.tempFranchise.id(ko.utils.unwrapObservable(this.selectedFranchise().id));
+		this.tempFranchise.franchise_name(ko.utils.unwrapObservable(this.selectedFranchise().franchise_name));
+		this.tempFranchise.franchise_num(ko.utils.unwrapObservable(this.selectedFranchise().franchise_num));
+		this.tempFranchise.franchise_set_id(ko.utils.unwrapObservable(this.selectedFranchise().franchise_set_id))
+		this.tempFranchise.created_at(ko.utils.unwrapObservable(this.selectedFranchise().created_at));
+		this.tempFranchise.updated_at(ko.utils.unwrapObservable(this.selectedFranchise().updated_at));
 	},
 		
 	
+	clickTest: function() {
+		var object = this.franchiseSetId();
+		return object.id;
+	},
 	
-	indexAction: function() {		
-		this.showSelectSet(true);
-		this.showSetGrid(true);
-		this.checkFlash();
+	franchiseIndexAction: function() {	
 		
+		//this.showSelectSet(true);
+		//this.showSetGrid(true);
+		//this.checkFlash();
 		
+		console.log(this.franchiseSetId().id);
 		
+		var id = this.franchiseSetId().id;
+						
+		$.getJSON('/franchise_sets/' + id + '/franchises', function(data) {
+			FranchiseViewModel.franchises(data);
+			FranchiseViewModel.currentPage('index');
+			FranchiseViewModel.shownOnce(true);
+			//console.log(data);	
 				
-		$.getJSON('/franchise_sets', function(data) {
-			FranchiseSetViewModel.franchiseSets(data);
-			FranchiseSetViewModel.currentPage('index');
-			FranchiseSetViewModel.shownOnce(true);
-			
-			
 		});
 		
 	},
@@ -103,7 +96,7 @@ var FranchiseSetViewModel = {
 		this.showSelectSet(false);
 		this.checkFlash();
 		this.currentPage('new');
-		this.clearTempFranchiseSet();
+		this.cleartempFranchise();
 		this.shownOnce(true);
 		//$(".alert").alert('close')
 		
@@ -126,7 +119,7 @@ var FranchiseSetViewModel = {
 	      success: function(createdItem) {
 	        FranchiseSetViewModel.errors([]);
 	        FranchiseSetViewModel.setFlash('Franchise Set successfully created.');
-	        FranchiseSetViewModel.clearTempFranchiseSet();
+	        FranchiseSetViewModel.cleartempFranchise();
 	        FranchiseSetViewModel.indexAction(); // redirect to Franchise Set list
 	        FranchiseSetViewModel.checkFlash();
 	        	        
@@ -143,15 +136,16 @@ var FranchiseSetViewModel = {
 
 	 editAction: function(itemToEdit) {
 	 	//console.log(itemToEdit)
+	 	
+	 	
+	 	
 	    this.checkFlash();
 	    this.showSelectSet(false);
-	    this.selectedFranchiseSet(itemToEdit);
-	    this.selectedFranchiseSet();
-	    //console.log(this.selectedFranchiseSet().id)
-	    this.prepareTempFranchiseSet();
+	    this.selectedFranchise(itemToEdit);
+	    //console.log(this.selectedFranchise())
+	    this.preparetempFranchise();
 	    this.currentPage('edit');
 	    this.shownOnce(true);
-	    FranchiseViewModel.franchiseIndexAction();
 	    
 	  },
 	  
@@ -205,14 +199,20 @@ var FranchiseSetViewModel = {
 			})
 		}
 	},
+
+
 	
+
 	
-	
-	
-	
-	
-	
-}; // End of FranchiseSetViewModel
+}; // End of Franchises View Model
+
+
+
+	 
+ko.postbox.subscribe("franchise_set_id", function(newValue) {
+        FranchiseViewModel.franchiseSetId(newValue);
+    }, this)
+
 
 
 
