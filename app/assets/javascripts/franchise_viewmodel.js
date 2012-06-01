@@ -71,7 +71,7 @@ var FranchiseViewModel = {
 		//this.showSetGrid(true);
 		//this.checkFlash();
 		
-		console.log(this.franchiseSetId().id);
+		//console.log(this.franchiseSetId().id);
 		
 		var id = this.franchiseSetId().id;
 						
