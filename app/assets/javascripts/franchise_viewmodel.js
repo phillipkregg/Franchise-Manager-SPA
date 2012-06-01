@@ -71,7 +71,7 @@ var FranchiseViewModel = {
 		//this.showSetGrid(true);
 		//this.checkFlash();
 		
-		//console.log(this.franchiseSetId().id);
+		console.log(this.franchiseSetId().id);
 		
 		var id = this.franchiseSetId().id;
 						
@@ -147,7 +147,7 @@ var FranchiseViewModel = {
 	    this.showSelectSet(false);
 	    this.selectedFranchise(itemToEdit);
 	    //console.log(this.selectedFranchise())
-	    this.preparetempFranchise();
+	    this.prepareTempFranchise();
 	    this.currentPage('edit');
 	    this.shownOnce(true);
 	    
