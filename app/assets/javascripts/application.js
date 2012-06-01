@@ -16,5 +16,5 @@
 //= require knockout-postbox.min.js
 //= require bootstrap
 //= require franchise_set_viewmodel
-//= require franchises_viewmodel
+//= require franchise_viewmodel
 

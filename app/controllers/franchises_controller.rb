@@ -47,10 +47,10 @@ class FranchisesController < ApplicationController
 
     respond_to do |format|
       if @franchise.save
-        format.html { redirect_to @franchise, notice: 'Franchise was successfully created.' }
+        #format.html { redirect_to @franchise, notice: 'Franchise was successfully created.' }
         format.json { render json: @franchise, status: :created, location: @franchise }
       else
-        format.html { render action: "new" }
+        #format.html { render action: "new" }
         format.json { render json: @franchise.errors, status: :unprocessable_entity }
       end
     end

@@ -92,11 +92,11 @@ var FranchiseViewModel = {
 	
 	
 	newAction: function() {
-		this.showSetGrid(false);
-		this.showSelectSet(false);
+		//this.showSetGrid(false);
+		//this.showSelectSet(false);
 		this.checkFlash();
-		this.currentPage('new');
-		this.cleartempFranchise();
+		//this.currentPage('new');
+		this.clearTempFranchise();
 		this.shownOnce(true);
 		//$(".alert").alert('close')
 		
@@ -105,30 +105,31 @@ var FranchiseViewModel = {
 	
 	 createAction: function(itemToCreate) {
 	 	
-	    var json_data = itemToCreate;
-	    
-	    //console.log(json_data)
-	    
+	    var json_data = itemToCreate;	
+	    var id = this.franchiseSetId().id;    
+	      
 	    $.ajax({
 	      type: 'POST',
-	      url: '/franchise_sets',
+	      url: '/franchise_sets/' + id + '/franchises',
 	      dataType: "json",
 	      data: {
-	      	franchise_set: json_data
+	      	franchise: json_data
 	      },	     
 	      success: function(createdItem) {
-	        FranchiseSetViewModel.errors([]);
-	        FranchiseSetViewModel.setFlash('Franchise Set successfully created.');
-	        FranchiseSetViewModel.cleartempFranchise();
-	        FranchiseSetViewModel.indexAction(); // redirect to Franchise Set list
-	        FranchiseSetViewModel.checkFlash();
+	        FranchiseViewModel.errors([]);
+	        FranchiseViewModel.setFlash('Franchise Set successfully created.');
+	        FranchiseViewModel.cleartempFranchise();
+	        FranchiseViewModel.franchiseIndexAction(); // refresh franchises
+	        FranchiseViewModel.checkFlash();
+	        
 	        	        
 	      },
 	      error: function(msg) {
-	        //FranchiseSetViewModel.errors(JSON.parse(msg.responseText));
+	        //FranchiseViewModel.errors(JSON.parse(msg.responseText));
 	      }
 	    });
 	    
+	    this.franchiseIndexAction();
 	  },
 	  
 	  
@@ -170,7 +171,7 @@ var FranchiseViewModel = {
 			success: function(updatedItem) {
 				FranchiseSetViewModel.errors([]);
 				FranchiseSetViewModel.setFlash('Franchise Set successfully updated.');
-				FranchiseSetViewModel.indexAction();
+				FranchiseSetViewModel.franchiseIndexAction();
 			},
 			error: function(msg) {
 				FranchiseSetViewModel.errors(JSON.parse(msg.responseText));
@@ -190,7 +191,7 @@ var FranchiseViewModel = {
 				success: function() {
 					FranchiseSetViewModel.errors([]);
 					FranchiseSetViewModel.setFlash('Franchise Set successfully deleted');
-					FranchiseSetViewModel.indexAction();
+					FranchiseSetViewModel.franchiseIndexAction();
 										
 				},
 				error: function(msg) {
