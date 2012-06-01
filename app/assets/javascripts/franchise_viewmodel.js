@@ -80,7 +80,8 @@ var FranchiseViewModel = {
 			FranchiseViewModel.currentPage('index');
 			FranchiseViewModel.shownOnce(true);
 			//console.log(data);	
-				
+			
+					
 		});
 		
 	},
@@ -100,6 +101,8 @@ var FranchiseViewModel = {
 		this.shownOnce(true);
 		//$(".alert").alert('close')
 		
+		
+		
 	},
 	
 	
@@ -118,7 +121,7 @@ var FranchiseViewModel = {
 	      success: function(createdItem) {
 	        FranchiseViewModel.errors([]);
 	        FranchiseViewModel.setFlash('Franchise Set successfully created.');
-	        FranchiseViewModel.cleartempFranchise();
+	        FranchiseViewModel.clearTempFranchise();
 	        FranchiseViewModel.franchiseIndexAction(); // refresh franchises
 	        FranchiseViewModel.checkFlash();
 	        

@@ -359,7 +359,7 @@
 <!-- ADD NEW Franchise Template  -->
 <script id="newFranchise" type="text/html">
 	
-	<form id="form">
+	<form id="new_franchise_form">
 	  <div class="field">
 		 	<label for="franchise_name">Franchise Name</label>
 		 	<input id="new_franchise_name" data-bind="value: franchise_name" />	 
@@ -395,6 +395,12 @@
 		
 		$("#new_franchise_modal").modal('hide');
 		
+		$('#new_franchise_modal').on('show', function () {
+			  $('input#new_franchise_name').focus()
+		})
+		
+		
+				
 	});
 
 </script>
