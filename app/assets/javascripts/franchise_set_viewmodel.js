@@ -83,8 +83,6 @@ var FranchiseSetViewModel = {
 		this.checkFlash();
 		
 		
-		
-				
 		$.getJSON('/franchise_sets', function(data) {
 			FranchiseSetViewModel.franchiseSets(data);
 			FranchiseSetViewModel.currentPage('index');

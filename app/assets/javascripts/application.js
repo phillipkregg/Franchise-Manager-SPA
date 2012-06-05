@@ -18,3 +18,11 @@
 //= require franchise_set_viewmodel
 //= require franchise_viewmodel
 
+$(document).ready(function() {
+	
+	
+	
+	
+	
+	
+})
