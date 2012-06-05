@@ -247,3 +247,34 @@ ko.bindingHandlers.rowFadeIn = {
 
 
 
+
+ko.bindingHandlers.labelGlow = {
+	    init: function(element, valueAccessor, allBindingsAccessor, viewModel) {
+	        // This will be called when the binding is first applied to an element
+	        // Set up any initial state, event handlers, etc. here
+	        $(element).animate({
+			  		color: "#666"
+			  }, 2000);
+
+	    },
+	    update: function(element, valueAccessor, allBindingsAccessor, viewModel) {
+	        // This will be called once when the binding is first applied to an element,
+	        // and again whenever the associated observable changes value.
+	        // Update the DOM element based on the supplied values here.
+
+				// First get the latest data that we're bound to
+	     		var value = valueAccessor(), allBindings = allBindingsAccessor();
+
+	    		// Next, whether or not the supplied model property is observable, get its current value
+	     		var valueUnwrapped = ko.utils.unwrapObservable(value); 
+
+	    		if (valueUnwrapped == true) 
+	         	$(element).animate({
+			  		color: "blue"
+			   }, 2000);
+	
+			}
+	
+		};
+
+

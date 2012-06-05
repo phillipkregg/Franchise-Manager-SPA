@@ -37,7 +37,7 @@ body {
     @include border-radius(10px);
 }
 
-h3 {
+h2, h3 {
   color: #666;
 }
 
@@ -58,6 +58,11 @@ th {
   }
 }
 
+
+.btn-primary.super { 
+    height: 30px;  
+    vertical-align: middle;
+}
 
 
     

@@ -167,8 +167,8 @@
 	</form>
 	
 	<div>
-	  <button data-bind="click: function() { FranchiseSetViewModel.createAction($data) }" class="btn btn-primary">Create</button>
-	  <a data-bind="click: function() { FranchiseSetViewModel.indexAction() }" class="btn">Cancel</a>
+	  <button data-bind="click: function() { FranchiseSetViewModel.createAction($data) }" class="btn btn-large btn-primary">Create</button>
+	  <a data-bind="click: function() { FranchiseSetViewModel.indexAction() }" class="btn btn-large">Cancel</a>
 	</div>
 	
 </script>
@@ -178,7 +178,7 @@
 <!-- EDIT Franchise Set Template  -->
 <script id="editTemplate" type="text/html">	
 
-	<h3 data-bind="text: set_name"></h3>
+	<h2 data-bind="text: set_name"></h2>
 	
 	<!-- Franchise Set tabs 	 -->
 	<ul id="set_tabs" class="nav nav-tabs">
@@ -237,12 +237,12 @@
 		<!-- Franchises Container -->
 		<div class="tab-pane" id="franchises">
 			
-			<h3 class="pull-left">Franchises</h3>
+			<h3 class="pull-left">Franchise List</h3>
 			
-			<a data-bind='click: function() { FranchiseViewModel.newAction() }' class="btn btn-primary pull-right" data-toggle="modal" href="#new_franchise_modal">
+			<a data-bind='click: function() { FranchiseViewModel.newAction() }' class="btn btn-large btn-primary pull-right" data-toggle="modal" href="#new_franchise_modal">
 				<i class="icon-plus-sign icon-white"></i>
 				Add Franchise
-			</a><br /><br />
+			</a><br /><br /><br />
 			
 			<table id="franchises_table" class="table table-bordered table-condensed">
 			  <thead>
@@ -281,6 +281,19 @@
 			</div>			
 			
 			
+		<div >
+			
+			<div class="well" data-bind="if: FranchiseViewModel.franchises().length === 0">
+				<h4>This Franchise Set currently has no Franchises :(</h4>
+				<h3>Would you like to add a Franchise?</h3>
+				<br/>
+				<a data-bind='click: function() { FranchiseViewModel.newAction() }' class="btn btn-large btn-primary super pull-left" data-toggle="modal" href="#new_franchise_modal">
+					<i class="icon-plus-sign icon-white"></i>
+					Yes!  Let me add a Franchise to <span data-bind="text: FranchiseSetViewModel.tempFranchiseSet.set_name"></span>
+				</a><br /><br /><br />
+			</div>
+			
+		</div>
 			
 			
 					
@@ -308,8 +321,7 @@
 				   </td>
 					<td data-bind="text: id"></td>
 				  	<td data-bind="text: $data.franchise_name"></td>
-				  	<td data-bind="text: $data.franchise_num"></td>
-				  				  					  
+				  	<td data-bind="text: $data.franchise_num"></td>				  				  					  
 				   
 				   <td>
 				   	
@@ -325,8 +337,6 @@
 	</div><!-- Closes Main tab-content div  -->	
 	
 </script>
-
-
 
 
 
@@ -349,8 +359,8 @@
 	</form>
 	
 	<div>
-	  <button data-dismiss="modal" data-bind="click: function() { FranchiseViewModel.createAction($data) }" class="btn btn-primary">Create Franchise</button>
-	  <a data-dismiss="modal" data-bind="click: function() { FranchiseViewModel.franchiseIndexAction() }" class="btn">Cancel</a>
+	  <button data-dismiss="modal" data-bind="click: function() { FranchiseViewModel.createAction($data) }" class="btn btn-large btn-primary">Create Franchise</button>
+	  <a data-dismiss="modal" data-bind="click: function() { FranchiseViewModel.franchiseIndexAction() }" class="btn btn-large">Cancel</a>
 	</div>
 	
 </script>
