@@ -138,11 +138,8 @@ var FranchiseViewModel = {
 	  
 	  
 
-	 editAction: function(itemToEdit) {
-	 	//console.log(itemToEdit)
-	 	
-	 	
-	 	
+	 franchiseEditAction: function(itemToEdit) {	 	
+	 	//console.log(itemToEdit)	 	
 	    this.checkFlash();
 	    this.showSelectSet(false);
 	    this.selectedFranchise(itemToEdit);
@@ -156,28 +153,28 @@ var FranchiseViewModel = {
 	  
 	  
 	  
-	updateAction: function(itemToUpdate) {
-		var json_data = itemToUpdate;
+	franchiseUpdateAction: function(franchiseToUpdate) {
+		var json_data = franchiseToUpdate;
 		//delete json_data.id;
 		//delete json_data.created_at;
 		//delete json_data.updated_at;
 		
-		//console.log(itemToUpdate)
+		var id = this.franchiseSetId().id; 		
  
 		$.ajax({
 			type: 'PUT',
-			url: '/franchise_sets/' + itemToUpdate.id(),
+			url: '/franchise_sets/' + id + '/franchises/' + franchiseToUpdate.id(),
 			dataType: "json",
 			data: {
-			  franchise_set: json_data
+			  franchise: json_data
 			},			
 			success: function(updatedItem) {
-				FranchiseSetViewModel.errors([]);
-				FranchiseSetViewModel.setFlash('Franchise Set successfully updated.');
-				FranchiseSetViewModel.franchiseIndexAction();
+				FranchiseViewModel.errors([]);
+				FranchiseViewModel.setFlash('Franchise successfully updated.');
+				FranchiseViewModel.franchiseIndexAction();
 			},
 			error: function(msg) {
-				FranchiseSetViewModel.errors(JSON.parse(msg.responseText));
+				FranchiseViewModel.errors(JSON.parse(msg.responseText));
 				}
 		});
 	},
@@ -185,20 +182,23 @@ var FranchiseViewModel = {
 
 	
 	
-	destroyAction: function(setToDestroy) {
+	franchiseDestroyAction: function(franchiseToDestroy) {
+		
+		var id = this.franchiseSetId().id; 				
+		
 		if (confirm("Are you sure?")) {
 			$.ajax({
 				type: 'DELETE',
-				url: '/franchise_sets/' + setToDestroy.id,
+				url: '/franchise_sets/' + id + '/franchises/' + franchiseToDestroy.id ,
 				dataType: 'json',
 				success: function() {
-					FranchiseSetViewModel.errors([]);
-					FranchiseSetViewModel.setFlash('Franchise Set successfully deleted');
-					FranchiseSetViewModel.franchiseIndexAction();
+					FranchiseViewModel.errors([]);
+					FranchiseViewModel.setFlash('Franchise successfully deleted');
+					FranchiseViewModel.franchiseIndexAction();
 										
 				},
 				error: function(msg) {
-					FranchiseSetViewModel.errors(JSON.parse(msg.responseText));
+					FranchiseViewModel.errors(JSON.parse(msg.responseText));
 				} 
 			})
 		}
@@ -219,4 +219,27 @@ ko.postbox.subscribe("franchise_set_id", function(newValue) {
 
 
 
+// JQuery fade-in when row object is added or removed
+ko.bindingHandlers.rowFadeIn = {
+	    init: function(element, valueAccessor, allBindingsAccessor, viewModel) {
+	        // This will be called when the binding is first applied to an element
+	        // Set up any initial state, event handlers, etc. here
+	        $(element).hide();
 
+	    },
+	    update: function(element, valueAccessor, allBindingsAccessor, viewModel) {
+	        // This will be called once when the binding is first applied to an element,
+	        // and again whenever the associated observable changes value.
+	        // Update the DOM element based on the supplied values here.
+
+				// First get the latest data that we're bound to
+	     		var value = valueAccessor(), allBindings = allBindingsAccessor();
+
+	    		// Next, whether or not the supplied model property is observable, get its current value
+	     		var valueUnwrapped = ko.utils.unwrapObservable(value); 
+
+	    		if (valueUnwrapped == true) 
+	         	$(element).fadeIn("fast"); // Make the element visible
+
+		    	}
+		};

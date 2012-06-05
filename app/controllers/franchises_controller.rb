@@ -64,7 +64,7 @@ class FranchisesController < ApplicationController
     respond_to do |format|
       if @franchise.update_attributes(params[:franchise])
         format.html { redirect_to @franchise, notice: 'Franchise was successfully updated.' }
-        format.json { head :no_content }
+        format.json { render json: @franchise }
       else
         format.html { render action: "edit" }
         format.json { render json: @franchise.errors, status: :unprocessable_entity }

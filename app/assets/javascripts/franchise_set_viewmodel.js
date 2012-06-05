@@ -13,18 +13,21 @@ var FranchiseSetViewModel = {
 	currentPage: ko.observable(),
 	errors: ko.observableArray(),
 	franchiseSets: ko.observableArray(),
+	availableCountries: ko.observableArray(['United States', 'Canada']),
+ 	availableTimeZones: ko.observableArray(['Eastern', 'Central', 'Mountain', 'Pacific']),
+ 	availableTemperatures: ko.observableArray(['Fahrenheit', 'Celsius']),
 	selectedFranchiseSet: ko.observable().publishOn("franchise_set_id"),
 	tempFranchiseSet: {
-		id:          ko.observable(),
-		set_name:    ko.observable(),
-		set_num:     ko.observable(),
-		soa_num:     ko.observable(),
-		address:     ko.observable(),
-		time_zone:   ko.observable(),
-		country:     ko.observable(),
-		temperature: ko.observable(),
-		created_at:  ko.observable(),
-		updated_at:  ko.observable()
+		id:          		ko.observable(),
+		set_name:    		ko.observable(),
+		set_num:     		ko.observable(),
+		soa_num:     		ko.observable(),
+		address:     		ko.observable(),
+		time_zone:   		ko.observable(),
+		country:  			ko.observable(),
+		temperature: 		ko.observable(),
+		created_at:  		ko.observable(),
+		updated_at:  		ko.observable()
 	},
 		
 	setFlash: function(flash) {
@@ -42,7 +45,7 @@ var FranchiseSetViewModel = {
 	
 		
 	
-	clearTempFranchiseSet: function() {
+	clearTempFranchiseSet: function() {		
 		this.tempFranchiseSet.id('');
 		this.tempFranchiseSet.set_name('');
 		this.tempFranchiseSet.set_num('');
@@ -99,11 +102,11 @@ var FranchiseSetViewModel = {
 	
 	
 	newAction: function() {
+		this.clearTempFranchiseSet();
 		this.showSetGrid(false);
 		this.showSelectSet(false);
 		this.checkFlash();
-		this.currentPage('new');
-		this.clearTempFranchiseSet();
+		this.currentPage('new');		
 		this.shownOnce(true);
 		//$(".alert").alert('close')
 		
@@ -213,6 +216,34 @@ var FranchiseSetViewModel = {
 	
 	
 }; // End of FranchiseSetViewModel
+
+
+
+
+// JQuery fade-in when row object is added or removed
+ko.bindingHandlers.rowFadeIn = {
+	    init: function(element, valueAccessor, allBindingsAccessor, viewModel) {
+	        // This will be called when the binding is first applied to an element
+	        // Set up any initial state, event handlers, etc. here
+	        $(element).hide();
+
+	    },
+	    update: function(element, valueAccessor, allBindingsAccessor, viewModel) {
+	        // This will be called once when the binding is first applied to an element,
+	        // and again whenever the associated observable changes value.
+	        // Update the DOM element based on the supplied values here.
+
+				// First get the latest data that we're bound to
+	     		var value = valueAccessor(), allBindings = allBindingsAccessor();
+
+	    		// Next, whether or not the supplied model property is observable, get its current value
+	     		var valueUnwrapped = ko.utils.unwrapObservable(value); 
+
+	    		if (valueUnwrapped == true) 
+	         	$(element).fadeIn("fast"); // Make the element visible
+
+		    	}
+		};
 
 
 

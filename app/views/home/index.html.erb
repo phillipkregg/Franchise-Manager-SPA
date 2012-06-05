@@ -88,7 +88,7 @@
 
 <!-- INDEX Template  -->
 <script id="indexTemplate" type="text/html">
-	<tr>	
+	<tr data-bind="rowFadeIn: true">	
 		<td>			
 	     <a data-bind="click: function() { FranchiseSetViewModel.editAction($data) }" class="btn btn-success">
 	     	<i class="icon-edit icon-white"></i>
@@ -150,31 +150,17 @@
 	  
 	  <div class="field">
 		 	<label for="country">Country</label>
-			<select name="new_country" data-bind="value: country"> 
-				<option value="" selected="selected">Select Country</option> 
-				<option value="United States">United States</option> 			
-				<option value="Canada">Canada</option> 			
-			</select>		
+			<select name="update_country" data-bind='options: FranchiseSetViewModel.availableCountries, optionsCaption: "Select Country" '></select>		
 	  </div>
 	  
 	  <div class="field">
 		 	<label for="time_zone">Time Zone</label>
-			<select name="new_timezone" data-bind="value: country"> 
-				<option value="" selected="selected">Select Time Zone</option> 
-				<option value="eastern">Eastern</option> 			
-				<option value="central">Central</option>
-				<option value="mountain">Mountain</option>
-				<option value="pacific">Pacific</option> 			
-			</select>		
+			<select name="new_timezone", data-bind="options: FranchiseSetViewModel.availableTimeZones, value: time_zone"></select>		
 	  </div>
 	  
 	  <div class="field">
 		 	<label for="temperature">Default Temperature</label>
-			<select name="new_temperature" data-bind="value: temperature"> 
-				<option value="" selected="selected">Select Temperature</option> 
-				<option value="fahrenheit">Fahrenheit</option> 			
-				<option value="celsius">Celsius</option> 			
-			</select>		
+			<select name="new_temperature" data-bind="options: FranchiseSetViewModel.availableTemperatures, value: temperature"></select>		
 	  </div>
 	  
 	  
@@ -229,31 +215,17 @@
 			  
 			  <div class="field">
 				 	<label for="country">Country</label>
-					<select name="update_country" data-bind="value: country"> 
-						<option value="" selected="selected">Select Country</option> 
-						<option value="United States">United States</option> 			
-						<option value="Canada">Canada</option> 			
-					</select>		
+					<select name="update_country" data-bind="options: FranchiseSetViewModel.availableCountries, value: country"></select>		
 			  </div>
 			  
 			  <div class="field">
 				 	<label for="time_zone">Time Zone</label>
-					<select name="update_timezone" data-bind="value: time_zone"> 
-						<option value="">Select Time Zone</option> 
-						<option value="eastern">Eastern</option> 			
-						<option value="central">Central</option>
-						<option value="mountain">Mountain</option>
-						<option value="pacific">Pacific</option> 			
-					</select>		
+					<select name="update_timezone" data-bind="options: FranchiseSetViewModel.availableTimeZones, value: time_zone"></select>		
 			  </div>
 			  
 			  <div class="field">
 				 	<label for="temperature">Default Temperature</label>
-					<select name="update_temperature" data-bind="value: temperature"> 
-						<option value="" >Select Temperature</option> 
-						<option value="fahrenheit">Fahrenheit</option> 			
-						<option value="celsius">Celsius</option> 			
-					</select>		
+					<select name="new_temperature" data-bind="options: FranchiseSetViewModel.availableTemperatures, value: temperature"></select>		
 			  </div>		  
 			  
 			</form>
@@ -293,20 +265,24 @@
 					<button class="close" data-dismiss="modal">×</button>
 					<h3>Add New Franchise</h3>
 			  </div>
-			  <div class="modal-body" data-bind='template: { name: "newFranchise", data: FranchiseViewModel.tempFranchise }' >
-			  	<p>Load new Franchise template and put it here</p>
-			  			  	
-			  </div>
-			  <!-- <div class="modal-footer">
-					<button data-bind="click: function() { FranchiseViewModel.createAction($data) }" class="btn btn-primary">Create Franchise</button>
-	  				<a data-dismiss="modal" data-bind="click: function() { FranchiseViewModel.franchiseIndexAction() }" class="btn">Cancel</a>
-			  </div>		
-			 -->
-			  
-				<!-- BELOW will go in modal-body when the Franchise ViewModel is ready    -->
-			   <!-- data-bind='template: {name: "newFranchise", data: tempFranchise}' -->
+			  <div class="modal-body" data-bind='template: { name: "newFranchise", data: FranchiseViewModel.tempFranchise }' >			  			  	
+			  </div>			 
 			  
 			</div>			
+			
+			
+			<!--***** EDIT franchise container - MODAL  *****-->
+			<div class="modal hide fade in" id="edit_franchise_modal">
+				<div class="modal-header" >
+					<button class="close" data-dismiss="modal">×</button>
+					<h3>Edit Franchise</span> </h3>
+			  </div>
+			  <div class="modal-body" data-bind='template: { name: "editFranchise", data: FranchiseViewModel.tempFranchise }' ></div>			  
+			</div>			
+			
+			
+			
+			
 					
 		</div><!-- Closes Franchise Tab pane --- THIS ALSO ENDS THE FRANCHISES VIEWMODEL SCOPE !!!!!  -->	
 			
@@ -323,9 +299,9 @@
 			
 		<!-- FRANCHISE INDEX Template  -->
 			<script id="franchiseIndexTemplate" type="text/html">
-				<tr>	
+				<tr data-bind="rowFadeIn: true">	
 					<td>			
-				     <a data-bind="click: function() { FranchiseViewModel.editAction($data) }" class="btn btn-success">
+				     <a data-bind="click: function() { FranchiseViewModel.franchiseEditAction($data) }" class="btn btn-success" data-toggle="modal" href="#edit_franchise_modal">
 				     	<i class="icon-edit icon-white"></i>
 				     	Edit
 				     </a>
@@ -337,7 +313,7 @@
 				   
 				   <td>
 				   	
-				     <a data-bind="click: function() { FranchiseSetViewModel.destroyAction($data) }" class="btn btn-danger pull-right">
+				     <a data-bind="click: function() { FranchiseViewModel.franchiseDestroyAction($data) }" class="btn btn-danger pull-right">
 				     	<i class="icon-trash icon-white"></i>
 				     	Delete
 				     </a>
@@ -378,6 +354,33 @@
 	</div>
 	
 </script>
+
+
+
+
+<!-- EDIT Franchise Template  -->
+<script id="editFranchise" type="text/html">
+	
+	<form id="edit_franchise_form">
+	  <div class="field">
+		 	<label for="franchise_name">Franchise Name</label>
+		 	<input id="edit_franchise_name" data-bind="value: franchise_name" />	 
+	  </div>
+	  
+	  <div class="field">
+		 	<label for="franchise_num">Franchise Number</label>
+		 	<input id="edit_franchise_num" data-bind="value: franchise_num" />
+	  </div>
+	  
+	</form>
+	
+	<div>
+	  <button data-dismiss="modal" data-bind="click: function() { FranchiseViewModel.franchiseUpdateAction($data) }" class="btn btn-primary">Update Franchise</button>
+	  <a data-dismiss="modal" data-bind="click: function() { FranchiseViewModel.franchiseIndexAction() }" class="btn">Cancel</a>
+	</div>
+	
+</script>
+
 
 
 <!--*****************************************
