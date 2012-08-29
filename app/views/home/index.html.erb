@@ -26,10 +26,10 @@
 </div>
 
 <!--**** FLASH MESSAGES *****-->
-<div class="alert" data-bind="visible: function() { FranchiseSetViewModel.shownOnce() }">
+<!-- <div class="alert" data-bind="visible: function() { FranchiseSetViewModel.shownOnce() }">
 	<a class="close" data-dismiss="alert" href="#">&times;</a>
 	<span data-bind='text: flash'></span>
-</div>
+</div> -->
 
 
 
@@ -304,6 +304,19 @@
 					
 		</div><!-- Closes Franchise Tab pane --- THIS ALSO ENDS THE FRANCHISES VIEWMODEL SCOPE !!!!!  -->	
 			
+
+		<!-- Begins Users tab pane  -->
+		<div class="tab-pane" id="users">
+			<strong>USERS ARE TO BE IMPLEMENTED</strong>
+		</div><!-- Closes Users tab pane -->
+
+		<!-- Begins Features tab pane  -->
+		<div class="tab-pane" id="features">
+			<strong>FEATURES ARE TO BE IMPLEMENTED</strong>
+		</div><!-- Closes Features tab pane -->		
+
+
+
 		<br /><hr />	
 		<div>
 		  <button data-bind="click: function() { FranchiseSetViewModel.updateAction($data) }" class="btn btn-large btn-primary">
@@ -337,9 +350,20 @@
 				   </td>
 				   
 				</tr>
-			</script>		
+			</script>	
+
+
+
+
+
+
 		
 	</div><!-- Closes Main tab-content div  -->	
+
+
+
+
+
 	
 </script>
 
